@@ -58,3 +58,5 @@ app.put("/completed",async function(req,res){ //mark them as completed
         completed: true
     })
 })
+
+app.listen(3000);
