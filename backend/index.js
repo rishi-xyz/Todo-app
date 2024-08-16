@@ -1,9 +1,13 @@
 const express = require("express");
 const { createTodo, updateTodo } = require("./types");
 const { todo } = require("./db");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin:"http://localhost:5173"
+}));// to allow the frontend to sliently hit backend
 
 //CRUD=>create,read,update,delete , points for all these minimum
 
@@ -15,7 +19,7 @@ app.get("/todos",async function(req,res){//to get all todos
 })
 
 app.post("/todos",async function(req,res){//create todos
-    const createPayload = req.body;
+        const createPayload = req.body;
     //check for correct input using zod
     const parsedPayload = createTodo.safeParse(createPayload);
     if(!parsedPayload.success){
