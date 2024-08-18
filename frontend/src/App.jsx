@@ -1,4 +1,4 @@
-import { useState ,useEffect } from 'react'
+import { useState ,useEffect, useMemo } from 'react'
 import './App.css'
 import { CreateTodo } from './assets/components/CreateTodo'
 import { Todos } from './assets/components/Todos'
@@ -8,10 +8,10 @@ function App() {
   
   useEffect(()=>{
     fetch("http://localhost:3000/todos")
-    .then(async function(res){
-      const json = await res.json();
-      setTodos(json.todos);      
-    })
+      .then(async function(res){
+        const json = await res.json();
+        setTodos(json.todos);
+      })
   },[])
   
   return (

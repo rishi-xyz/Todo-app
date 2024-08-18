@@ -1,12 +1,25 @@
+/* Container for all todo items */
+.outerbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    padding-right: auto;
+}
+
+/* Styling for each todo container */
 .todos-container {
     background-color: #83d1f5;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 600px;
     margin: 20px auto;
+    flex: 1 1 300px; /* Makes the container responsive */
+    box-sizing: border-box;
 }
 
+/* Styling for each todo item */
 .todo-item {
     background-color: #ffffff;
     padding: 15px;
@@ -15,18 +28,21 @@
     margin-bottom: 20px;
 }
 
+/* Title styling */
 .todo-item h1 {
     font-size: 24px;
     margin: 0;
     color: #333;
 }
 
+/* Description styling */
 .todo-item h2 {
     font-size: 18px;
     margin: 10px 0;
     color: #666;
 }
 
+/* Button styling */
 .Markasdone-button {
     background-color: #007bff;
     color: white;
@@ -39,4 +55,37 @@
 
 .Markasdone-button:hover {
     background-color: #0056b3;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .todos-container {
+        max-width: 90%; /* Adjust the width on smaller screens */
+        margin: 10px auto;
+    }
+
+    .todo-item h1 {
+        font-size: 20px; /* Adjust font size */
+    }
+
+    .todo-item h2 {
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .Markasdone-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .outerbox {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .todos-container {
+        max-width: 100%;
+        padding: 15px;
+    }
 }

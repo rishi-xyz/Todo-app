@@ -2,7 +2,7 @@ import './Todos.css'
 
 export function Todos({todos}) {
     return (
-        <div>
+        <div className='outerbox'>
             {todos.map(function(todo){
                 return (
                     <div className="todos-container">
