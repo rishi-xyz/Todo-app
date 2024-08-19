@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './CreateTodo.css';
 
-export function CreateTodo(props) {
+export function CreateTodo({fetchtodo}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -29,6 +29,9 @@ export function CreateTodo(props) {
       // Resetting the input fields after a successful addition
       setTitle("");
       setDescription("");
+
+      //trigger fetchtodo to fetch the todos
+      fetchtodo();
     } catch (error) {
       console.error("Error adding todo:", error);
       alert("Failed to add todo");
