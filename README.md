@@ -7,7 +7,6 @@ This is a simple Todo application built as part of my learning journey in the **
 
 - **Add Todos:** Create new tasks that you need to accomplish.
 - **View Todos:** View a list of all your tasks.
-- **Edit Todos:** Modify existing tasks to update their details.
 - **Delete Todos:** Remove tasks that are no longer needed.
 - **Mark as Complete:** Mark tasks as completed once they are done.
 
@@ -22,13 +21,13 @@ This is a simple Todo application built as part of my learning journey in the **
   - Express.js
 
 - **Database:**
-  - MongoDB
+  - MongoDB 
 
 - **Version Control:**
   - Git & GitHub
 
 - **Deployment:**
-  - vercel
+  - Vercel
 
 ## Getting Started
 
@@ -44,28 +43,35 @@ To get a local copy up and running, follow these simple steps.
 1. **Clone the repository:**
 
    ```
-   git clone https://github.com/your-username/todo-app.git
-   cd todo-app
+   git clone https://github.com/rishi-xyz/Todo-app.git
+   cd Todo-app
    ```
   2. **Install dependencies:**
 	  ```
 	  npm install
 	  ```
   3. **Set up environment variables:**
-	  > Create a `.env` file in the root directory and add your MongoDB connection string:
+	  > Create a `.env` file in the root directory and add your MongoDB connection string in backend dir:
   	  ```
 	  MONGODB_URI=your-mongodb-connection-string
 	  ```
   4. **Run the application:**
+	  > In backend directory:(To run backend)
 	  ```
-	  npm start
+	  node index.js 
 	  ```
+	  > In frontend directory: (To run frontend)
+	  ```
+	  npm run dev # To run frontend
+	  ```
+   	  > Run both together
+
   5. **Access the application:**
-	  > Open your browser and navigate to `http://localhost:3000`.
+	  > Open your browser and navigate to `http://localhost:5173`.
 	  
  ## Project Structure
 ```plaintext
-todo-app/
+Todo-app/
 ├── backend/
 │   ├── db.js
 │   ├── index.js
