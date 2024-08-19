@@ -28,6 +28,7 @@ This is a simple Todo application built as part of my learning journey in the **
   - Git & GitHub
 
 - **Deployment:**
+  - vercel
 
 ## Getting Started
 
@@ -64,26 +65,35 @@ To get a local copy up and running, follow these simple steps.
 	  
  ## Project Structure
 ```plaintext
-├── public
-│   ├── index.html
-│   ├── styles.css
-│   └── assets
-├── src
-│   ├── components
-│   │   ├── TodoItem.js
-│   │   ├── TodoList.js
-│   │   └── ...
-│   ├── pages
-│   │   ├── Home.js
-│   │   ├── About.js
-│   │   └── ...
-│   ├── App.js
+todo-app/
+├── backend/
+│   ├── db.js
 │   ├── index.js
-│   └── services
-│       └── api.js
-├── .env
-├── package.json
+│   ├── package.json
+│   ├── package-lock.json
+│   └── types.js
+│
+├── frontend/
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public/
+│   │   └── vite.svg
+│   ├── src/
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── assets/
+│   │   │   ├── react.svg
+│   │   │   └── components/
+│   │   │       ├── CreateTodo.css
+│   │   │       ├── CreateTodo.jsx
+│   │   │       ├── Todos.css
+│   │   │       └── Todos.jsx
+│   ├── README.md
+│   └── vite.config.js
+│
 ├── README.md
-└── LICENSE
+
 ```
 	 
