@@ -1,30 +1,16 @@
-import { useState, useCallback, useMemo, useEffect } from 'react'
-import './App.css'
-import { CreateTodo } from './assets/components/CreateTodo'
-import { Todos } from './assets/components/Todos'
+import {BrowserRouter, Route, Routes} from "react-router-dom"; 
+import './App.css';
+import Homepage from './pages/Homepage';
+import Dashboard from "./pages/Dashboard";
 
-function App() {
-  const [todos, setTodos] = useState([]);
-  
-  const fetchtodo = ()=>{
-    fetch("http://localhost:3000/todos")
-      .then(async function(res){
-        const json = await res.json();
-        setTodos(json.todos);
-      })
-  }
-
-  useEffect(()=>{
-    fetchtodo();
-  },[]);
-  
+function App() {  
   return (
-    <>
-      <div>
-        <CreateTodo  fetchtodo={fetchtodo}></CreateTodo> {/*this will trigger fetch todo to fetch todods again*/}
-        <Todos todos={todos}></Todos>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+          <Route path='/' element={<Homepage/>} />
+          <Route  path='/dashboard' element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
