@@ -2,65 +2,86 @@ const express = require("express");
 const { createTodo, updateTodo } = require("./types");
 const { todo } = require("./db");
 const cors = require("cors");
+require('dotenv').config();
 
 const app = express();
+
 app.use(express.json());
 app.use(cors({
-    origin:"http://localhost:5173"
-}));// to allow the frontend to sliently hit backend
+    origin: process.env.CLIENT_URL, 
+}));
 
-//CRUD=>create,read,update,delete , points for all these minimum
+// CRUD => Create, Read, Update, Delete endpoints
 
-app.get("/todos",async function(req,res){//to get all todos
-    const todos = await todo.find();//gives all todos
-    res.json({
-        todos
-    })
-})
-
-app.post("/todos",async function(req,res){//create todos
-        const createPayload = req.body;
-    //check for correct input using zod
-    const parsedPayload = createTodo.safeParse(createPayload);
-    if(!parsedPayload.success){
-        res.status(411).json({
-            msg:"You sent the wrong inputs",
-        })
-        return;
+// Get all todos
+app.get("/todos", async function(req, res) {
+    try {
+        const todos = await todo.find();
+        res.json({ todos });
+    } catch (error) {
+        res.status(500).json({
+            msg: "Failed to fetch todos",
+            error: error.message
+        });
     }
-    // create todo
-    try{
+});
+
+// Create a new todo
+app.post("/todos", async function(req, res) {
+    const createPayload = req.body;
+
+    // Validate input using Zod
+    const parsedPayload = createTodo.safeParse(createPayload);
+    if (!parsedPayload.success) {
+        return res.status(400).json({
+            msg: "Invalid input",
+        });
+    }
+
+    // Create the todo
+    try {
         await todo.create({
             title: createPayload.title,
             description: createPayload.description,
             completed: false
-        })
-    }catch(error){
+        });
+        res.json({ msg: "Todo created successfully" });
+    } catch (error) {
         res.status(500).json({
-            msg:"Something went wrong"
-        })
+            msg: "Error creating todo",
+            error: error.message
+        });
     }
+});
 
-    res.json({
-        msg: "Todo created"
-    })
-})
-
-app.put("/completed",async function(req,res){ //mark them as completed
+// Update todo status to completed
+app.put("/completed", async function(req, res) {
     const updatePayload = req.body;
-    const parsedPayload = updateTodo.safeParse(updatePayload);
-    if(!parsedPayload.success){
-        res.status(411).json({
-            msg:"You sent the wrong inputs",
-        })
-        return;
-    }
-    // mark as complete
-    await todo.update({
-        _id: req.body.id,
-    },{
-        completed: true
-    })
-})
 
-app.listen(3000);
+    // Validate input using Zod
+    const parsedPayload = updateTodo.safeParse(updatePayload);
+    if (!parsedPayload.success) {
+        return res.status(400).json({
+            msg: "Invalid input",
+        });
+    }
+
+    try {
+        await todo.updateOne({
+            _id: req.body.id,
+        }, {
+            completed: true
+        });
+        res.json({ msg: "Todo marked as completed" });
+    } catch (error) {
+        res.status(500).json({
+            msg: "Error updating todo",
+            error: error.message
+        });
+    }
+});
+
+// Start the server
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});

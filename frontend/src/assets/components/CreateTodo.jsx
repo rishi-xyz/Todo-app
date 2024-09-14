@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import './CreateTodo.css';
 
+
 export function CreateTodo({fetchtodo}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const handleAddTodo = async () => {
     try {
-      const res = await fetch("http://localhost:3000/todos", {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/todos`, {
         method: "POST",
         body: JSON.stringify({
           title: title,
